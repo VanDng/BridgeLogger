@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csproj", "{67C4DF51-541A-45BE-A283-096DB46C5DA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BridgeLogger", "BridgeLogger\BridgeLogger.csproj", "{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67C4DF51-541A-45BE-A283-096DB46C5DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C4DF51-541A-45BE-A283-096DB46C5DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C4DF51-541A-45BE-A283-096DB46C5DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C4DF51-541A-45BE-A283-096DB46C5DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C8FF11A-09B8-4607-B1FD-F20493C2C3EC}
+	EndGlobalSection
+EndGlobal
