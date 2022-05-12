@@ -4,43 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using BridgeLogger;
+using Sample;
 
 namespace ConsoleApp1
 {
-    class ExternalLibrary
-    {
-        private readonly ILogger<ExternalLibrary> _logger;
-
-        public ExternalLibrary(ILogger<ExternalLibrary> logger)
-        {
-            _logger = logger;
-        }
-
-        public ExternalLibrary(ILoggerFactory loggerFactory)
-        {
-            _logger = loggerFactory.CreateLogger<ExternalLibrary>();
-        }
-
-        public void DoSomething()
-        {
-            _logger?.LogInformation("{Someone} {Action} {SomeoneElse}", "Dustin", "Punches", "Other Dustin");
-        }
-    }
-
-
     class Program
     {
         static void Main(string[] args)
         {
-            var baseFactory = ConfigureLog();
+            var loggerFactory = InitializeLoggerFactory();
 
-            TryWithLogFactory(baseFactory);
-            TryWithLogger(baseFactory);
+            Utility.Invoke(BridgeTheFactory, loggerFactory);
+            Utility.Invoke(BridgeTheLogger, loggerFactory);
 
             Console.ReadKey();
         }
 
-        static ILoggerFactory ConfigureLog()
+        static ILoggerFactory InitializeLoggerFactory()
         {
             var seriLogger1 = new LoggerConfiguration().MinimumLevel.Debug()
                 .WriteTo.Console()
@@ -50,65 +31,43 @@ namespace ConsoleApp1
                 .WriteTo.ColoredConsole(foregroundColor: ConsoleColor.Red)
                 .CreateLogger();
 
-            var baseFactory = new LoggerFactory();
-            baseFactory.AddSerilog(seriLogger1);
-            baseFactory.AddSerilog(seriLogger2);
+            var factory = new LoggerFactory();
+            factory.AddSerilog(seriLogger1);
+            factory.AddSerilog(seriLogger2);
 
-            return baseFactory;
+            return factory;
         }
 
-        static void TryWithLogFactory(ILoggerFactory baseFactory)
+        static void BridgeTheFactory(ILoggerFactory baseFactory)
         {
-            BeginSection();
-
-            var baseLogger = baseFactory.CreateLogger<ExternalLibrary>();
+            var logger = baseFactory.CreateLogger<ExternalLibrary>();
 
             var bridgeFactory = new BridgeLoggerFactory();
-            // LogFormatter must be set before adding providers,
-            // otherwise the formatter won't get invoked
+            bridgeFactory.AddLoggerAsProvider(logger);
             bridgeFactory.SetLogFormatter(CustomLogFormatter);
-            bridgeFactory.AddLoggerAsProvider(baseLogger);
 
             var externalLibrary = new ExternalLibrary(bridgeFactory);
-            externalLibrary.DoSomething();
-
-            EndSection();
+            externalLibrary.WriteSomeLog();
         }
 
-        static void TryWithLogger(ILoggerFactory logFactory)
+        static void BridgeTheLogger(ILoggerFactory logFactory)
         {
-            BeginSection();
-
             var logger = logFactory.CreateLogger<ExternalLibrary>();
 
-            var externalLibrary = new ExternalLibrary(logger);
-            externalLibrary.DoSomething();
+            var bridgeLogger = new BridgeLogger<ExternalLibrary>(logger, CustomLogFormatter);
 
-            EndSection();
+            var externalLibrary = new ExternalLibrary(bridgeLogger);
+            externalLibrary.WriteSomeLog();
         }
 
-        static (string, object[]) CustomLogFormatter(string format, object[] args)
+        static (string, object[]) CustomLogFormatter(string format, List<object> args)
         {
-            var newFormat = "{@Module} " + format;
+            var newFormat = $"{{@CustomParam}} {format}";
 
-            var newArgList = args.ToList();
-            newArgList.Insert(0, "ExternalLibrary");
-            var newArgs = newArgList.ToArray();
+            args.Insert(0, "CustomParam");
+            var newArgs = args.ToArray();
 
             return (newFormat, newArgs);
-        }
-
-        static void BeginSection([CallerMemberName] string name = "")
-        {
-            Console.WriteLine("****************************************");
-            Console.WriteLine(name);
-            Console.WriteLine("****************************************");
-        }
-
-        static void EndSection()
-        {
-            Console.WriteLine();
-            Console.WriteLine();
         }
     }
 }

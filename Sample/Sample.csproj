@@ -13,4 +13,8 @@
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BridgeLogger\BridgeLogger.csproj" />
+  </ItemGroup>
+
 </Project>

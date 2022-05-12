@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "Sample\Sample.csproj", "{67C4DF51-541A-45BE-A283-096DB46C5DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BridgeLogger", "BridgeLogger\BridgeLogger.csproj", "{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BridgeLogger", "BridgeLogger\BridgeLogger.csproj", "{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreAPI5", "NetCoreAPI5\NetCoreAPI5.csproj", "{F39C84A6-7292-4D52-A930-091736E4596C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90B23AD1-4FF7-4314-BC55-B0C9107CD1FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F39C84A6-7292-4D52-A930-091736E4596C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F39C84A6-7292-4D52-A930-091736E4596C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F39C84A6-7292-4D52-A930-091736E4596C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F39C84A6-7292-4D52-A930-091736E4596C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
