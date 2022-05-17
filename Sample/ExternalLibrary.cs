@@ -21,7 +21,17 @@ namespace Sample
 
         public void WriteSomeLog()
         {
-            _logger?.LogInformation("{@Someone} {@Action} {@SomeoneElse}", "Dustin", "Punches", "Other Dustin");
+            var dustin = new
+            {
+                Name = "Dustin"
+            };
+
+            var anotherDustin = new
+            {
+                Name = "AnotherDustin"
+            };
+
+            _logger?.LogInformation("{@Someone} {@Action} {@SomeoneElse}", dustin, "Punches", anotherDustin);
         }
     }
 }

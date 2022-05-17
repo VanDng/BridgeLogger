@@ -62,9 +62,12 @@ namespace ConsoleApp1
 
         static (string, object[]) CustomLogFormatter(string format, List<object> args)
         {
-            var newFormat = $"{{@CustomParam}} {format}";
+            var newFormat = $"{{@BridgeParam}} {format}";
 
-            args.Insert(0, "CustomParam");
+            args.Insert(0, new
+            {
+                Message = "Bridge"
+            });
             var newArgs = args.ToArray();
 
             return (newFormat, newArgs);
